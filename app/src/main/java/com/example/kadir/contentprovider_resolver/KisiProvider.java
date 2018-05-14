@@ -80,7 +80,17 @@ public class KisiProvider extends ContentProvider {
     @Nullable
     @Override
     public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
-        return null;
+
+        switch (matcher.match(uri)){
+
+            case 1 :
+               Cursor c = db.query(KISILER_TABLE_NAME,projection,selection,selectionArgs,null,null,null);
+               return c;
+
+           default:
+               throw new IllegalArgumentException("Bilinmeyen Uri :"+uri);
+        }
+
     }
 
     @Nullable
@@ -107,7 +117,17 @@ public class KisiProvider extends ContentProvider {
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+        int silinenSatirSayisi = 0;
+        switch (matcher.match(uri)){
+            case 1:
+                silinenSatirSayisi = db.delete(KISILER_TABLE_NAME,selection,selectionArgs);
+                break;
+            default:
+                throw new IllegalArgumentException("Bilinmeyen Uri : "+uri);
+        }
+
+        return silinenSatirSayisi;
     }
 
     @Override
