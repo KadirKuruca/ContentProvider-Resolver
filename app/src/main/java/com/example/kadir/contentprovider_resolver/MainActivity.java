@@ -1,6 +1,7 @@
 package com.example.kadir.contentprovider_resolver;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -50,5 +51,12 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,tumKisiler);
             lvKisiler.setAdapter(adapter);
         }
+    }
+
+    public void openContentProviderActivity(View view) {
+
+        Intent intent = new Intent(this,ContentProviderActivity.class);
+        startActivity(intent);
+
     }
 }
